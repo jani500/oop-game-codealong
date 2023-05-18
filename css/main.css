@@ -9,7 +9,7 @@ body {
 
   /* We will use relative units (vw and vh) viewport width and height */
 
-  height: 50vh;
+  height: 80vh;
 
   /* we add this so #player can be relative to the board */
   position: relative;
@@ -17,5 +17,10 @@ body {
 
 #player {
   background-color: blue;
+  position: absolute;
+}
+
+.obstacle {
+  background-color: purple;
   position: absolute;
 }

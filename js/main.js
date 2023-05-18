@@ -52,6 +52,45 @@ class Player {
 }
 
 const player = new Player();
+const obstaclesArr = [];
+
+// create new obstacles
+
+setInterval(() => {
+  const newObstacle = new Obstacle();
+  obstaclesArr.push(newObstacle);
+}, 2000);
+
+// move all obstacles
+setInterval(() => {
+  obstaclesArr.forEach((obstacle) => {
+    obstacle.moveDown();
+
+    if (
+      obstacle.positionX < player.positionX + player.width &&
+      obstacle.positionX + obstacle.width > player.positionX &&
+      obstacle.positionY < player.positionY + player.height &&
+      obstacle.height + obstacle.positionY > player.positionY
+    ) {
+      console.log("game over my friend");
+
+      // location.href = './gameover.html';
+    }
+  });
+}, 600);
+
+/* let time = 0; */
+
+/* setInterval(() => {
+  if (time === 60) {
+    obstaclesArr.forEach((obstacle) => {
+      obstacle.moveDown();
+    });
+  } else if (time === 100) {
+    const newObstacle = new Obstacle();
+    obstaclesArr.push(newObstacle);
+  }
+}, time); */
 
 // attach event listeners
 
@@ -66,3 +105,45 @@ document.addEventListener("keydown", (event) => {
     player.moveRight();
   }
 });
+
+class Obstacle {
+  constructor(obstacle) {
+    this.positionX = 45;
+    this.positionY = 50;
+    this.width = 10;
+    this.height = 10;
+
+    this.domElement = null;
+
+    this.createDomElement();
+  }
+
+  createDomElement() {
+    // create the element
+    this.domElement = document.createElement("div");
+
+    // add content or modify (ex. innerHTML);
+
+    this.domElement.className = "obstacle";
+    this.domElement.style.width = this.width + "vw";
+    this.domElement.style.height = this.height + "vh";
+    this.domElement.style.bottom = this.positionY + "vh";
+    this.domElement.style.left = this.positionX + "vw";
+
+    // append to the dom where the board is the parent
+    const parentElm = document.getElementById("board");
+    parentElm.appendChild(this.domElement);
+  }
+
+  moveDown() {
+    this.positionY -= 5;
+    // console.log(`new position.... ${this.positionY}`);
+    this.domElement.style.bottom = this.positionY + "vh";
+  }
+}
+
+const obstacleOne = new Obstacle();
+
+setInterval(() => {
+  obstacleOne.moveDown();
+}, 200);

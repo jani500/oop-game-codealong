@@ -1,3 +1,21 @@
 body {
-    background-color: #ffe09c;
+  background-color: #ffe09c;
+}
+
+#board {
+  background-color: green;
+
+  /* use pixels for absolute lengths, e.g. height: 200px; */
+
+  /* We will use relative units (vw and vh) viewport width and height */
+
+  height: 50vh;
+
+  /* we add this so #player can be relative to the board */
+  position: relative;
+}
+
+#player {
+  background-color: blue;
+  position: absolute;
 }
